@@ -1,0 +1,11 @@
+.aws/
+.local/
+.bash_history
+.bash_logout
+.cache/
+.config/
+.docker/
+.local/
+.nano/
+.profile
+

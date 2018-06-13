@@ -1,0 +1,117 @@
+Ian's 10 minute dev environment walkthrough.
+
+Spin up a new server
+Set up a DNS name, if appropriate.  I picked docker.ianmonroe.com for this experiment.
+for the purposes of this experiment, I built this on a Linode 1024 linode, ubuntu 16.04 image.
+
+After the node spins up:
+
+ssh root@docker.ianmonroe.com
+adduser imonroe 
+usermod -aG sudo imonroe
+
+# log out, log back in as your user 
+ssh imonroe@docker.ianmonroe.com
+
+# install docker.
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update
+sudo apt-get install docker-ce
+# prove docker is installed and working.
+sudo docker run hello-world
+
+# install docker-compose
+# replace 1.21.2 with current version from: https://github.com/docker/compose/releases
+sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+# make it runnable
+sudo chmod +x /usr/local/bin/docker-compose
+
+# add local user to the docker group.
+sudo usermod -aG docker ${USER}
+
+# Get your uid; you'll need it momentarily. e.g., 1000, et.
+id
+# Get your gid for the docker group. e.g., 999 
+getent group docker | awk -F: '{printf "Group %s with GID=%d\n", $1, $3}'
+
+sudo nano /etc/environment
+# edit the file to add in the contents of the environment.txt file.
+# update it to match your uid and gui from above.
+
+mkdir ~/docker
+
+# set permissions.
+sudo apt install acl
+sudo setfacl -Rdm g:docker:rwx ~/docker
+sudo chmod -R 775 ~/docker
+
+# set up a docker-compose alias.
+sudo nano ~/.bashrc
+# add the contents of the bashrc.txt file.
+
+##### Now is a real good time to close your session and log back in to 
+##### fully reload your environment.
+##### SSH back into the server, and log in as imonroe 
+ssh imonroe@docker.ianmonroe.com
+
+# Back to work.
+# make sure you can run docker stuff with correct permissions.
+docker ps -a
+
+# start your docker-compose file.
+# see the basic docker-compose.yml file for contents
+nano ~/docker/docker-compose.yml
+
+# use the content of the docker-compose.yml file.
+# when you're done, just do a:
+dockerup
+
+# boom goes the dynamite.
+
+# install docker machine
+base=https://github.com/docker/machine/releases/download/v0.14.0 && curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine && sudo install /tmp/docker-machine /usr/local/bin/docker-machine
+
+# install AWS CLI tools
+sudo apt-get update
+sudo apt install python-pip
+pip install --upgrade pip'
+pip install awscli --upgrade --user
+
+# make a credentials file for the AWS credentials:
+mkdir ~/.aws
+nano ~/.aws/credentials
+
+# make the file look like:
+# [default]
+# aws_access_key_id = AKIXXXXXXXXXXX
+# aws_secret_access_key = XXXXXXXXXXXXXX
+#
+# Those credentials should be set up in AWS and a IAM account. See the aws_security_policy doc for what that policy needs to look like.
+
+
+
+# create a docker-machine instance in AWS:
+docker-machine create --driver amazonec2 --amazonec2-open-port 8000 aws-sandbox
+
+# that provisions a machine called aws-sandbox, installs docker, and opens port 8000
+# to confirm, check the AWS ec2 console, and look for your new instance.
+
+# check the status inside docker-machine:
+docker-machine ls
+
+# connect to it, make sure it's the active host
+docker-machine env aws-sandbox
+eval $(docker-machine env aws-sandbox)
+
+# run helloworld
+docker run hello-world
+
+# ssh into the machine
+docker-machine ssh aws-sandbox
+
+#remove the machine
+docker-machine rm aws-sandbox
+
