@@ -101,6 +101,7 @@ services:
   mysql:
     image: mysql
     container_name: mysql
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
     volumes:
@@ -125,3 +126,15 @@ services:
     environment:
       POSTGRES_PASSWORD: example
     restart: always
+
+    
+#      - sshvolume:<path-in-docker>
+    
+
+#volumes:
+#  sshvolume:
+#    driver: vieux/sshfs
+#    driver_opts:
+#      sshcmd: <user>@<host>:<path-in-host>
+#      password: <password>
+
