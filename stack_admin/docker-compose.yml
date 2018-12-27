@@ -21,11 +21,14 @@ services:
     restart: always
     command: --templates http://templates/templates.json
     labels:
-      - "traefik.frontend.rule=Path:/portainer/"
+      #- "traefik.frontend.rule=Path:/portainer/"
       - "traefik.backend=portainer"
-      - "traefik.frontend.rule=PathPrefixStrip:/portainer/"
+      - "traefik.frontend.rule=PathPrefixStrip:/portainer"
       - "traefik.port=9000"
       - "traefik.enable=true"
+      - "traefik.frontend.redirect.regex=^(.*)/portainer$$"
+      - "traefik.frontend.redirect.replacement=$$1/portainer/"
+      - "traefik.frontend.rule=PathPrefix:/portainer;ReplacePathRegex: ^/portainer/(.*) /$$1"
     #managed by Traefik
     #ports:
     #  - "9000:9000"

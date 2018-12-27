@@ -23,5 +23,5 @@
     "Certs": []
   },
   "ChallengeCerts": {},
-  "HTTPChallenge": null
+  "HTTPChallenge": {}
 }
