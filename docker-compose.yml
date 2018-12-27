@@ -15,8 +15,8 @@ services:
       - ./stack_admin/traefik/acme.json:/acme.json
     container_name: traefik
     networks:
-      - frontend
-      - backend
+      - custom_public
+      - custom_private
 
   portainer:
     image: portainer/portainer
@@ -41,8 +41,8 @@ services:
     environment:
       - TZ="America/Denver"
     networks:
-      - frontend
-      - backend
+      - custom_public
+      - custom_private
 
   watchtower:
     container_name: watchtower
@@ -52,14 +52,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --schedule "0 0 4 * * *" --cleanup
     networks:
-      - frontend
+      - custom_public
 
 networks:
   custom_public:
-    name: frontend
     driver: bridge
   custom_private:
-    name: backend
     driver: bridge
 
 
