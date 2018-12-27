@@ -64,8 +64,8 @@ services:
       - app1_public
     labels:
       - "traefik.backend=app1.adminer"
-      - "traefik.frontend.rule=Host:app1.docker.ianmonroe.com"
-      - "traefik.frontend.rule=PathPrefixStrip:/adminer"
+      - "traefik.frontend.passHostHeader:true"
+      - "traefik.frontend.rule=Host:app1.docker.ianmonroe.com;PathPrefixStrip:/adminer"
       - "traefik.port=8080"
       - "traefik.enable=true"
       - "traefik.frontend.entryPoints=http,https"
