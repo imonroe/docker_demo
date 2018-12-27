@@ -52,6 +52,7 @@ services:
 
 networks:
   app1_public:
-    external: frontend
+    external:
+      name: frontend
   app1_private:
     driver: bridge
