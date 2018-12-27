@@ -57,6 +57,8 @@ services:
 networks:
   frontend:
     driver: bridge
+    name: frontend
   backend:
-    driver: default
+    driver: bridge
+    name: frontend
 
