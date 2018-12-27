@@ -49,7 +49,7 @@ services:
       - "80"
     labels:
       - "traefik.backend=app1"
-      - "traefik.frontend.rule=PathPrefixStrip:/app1"
+      - "traefik.frontend.rule=Host:docker.ianmonroe.com;PathPrefixStrip:/app1"
       - "traefik.port=80"
       - "traefik.enable=true"
       - "traefik.frontend.entryPoints=http,https"
