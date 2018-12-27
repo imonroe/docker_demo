@@ -29,4 +29,4 @@ entryPoint = "https"
   entryPoint = "http"
 
 [[acme.domains]]
-  main = "project.ianmonroe.com"
+  main = "docker.ianmonroe.com"
