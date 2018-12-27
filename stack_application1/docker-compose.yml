@@ -30,7 +30,7 @@ services:
     labels:
       - "traefik.backend=app1.adminer"
       - "traefik.frontend.rule=PathPrefixStrip:/app1/adminer"
-      - "traefik.port=80"
+      - "traefik.port=8080"
       - "traefik.enable=true"
       - "traefik.frontend.entryPoints=http,https"
 
