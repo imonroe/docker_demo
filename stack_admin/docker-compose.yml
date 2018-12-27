@@ -1,31 +1,33 @@
 version: '3'
 services:
-#  traefik:
-#    image: traefik:1.5.4
-#    restart: always
-#    ports:
-#      - "80:80"
-#      - "443:443"
-#      - "8080:8080"
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-#      - ./traefik/traefik.toml:/traefik.toml
-#      - ./traefik/acme.json:/acme.json
-#    container_name: traefik
+
+  traefik:
+    image: traefik:1.5.4
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik/traefik.toml:/traefik.toml
+      - ./traefik/acme.json:/acme.json
+    container_name: traefik
+
   portainer:
     image: portainer/portainer
     container_name: portainer
     restart: always
     command: --templates http://templates/templates.json
     ports:
-      - "10001:9000"
+      - "9000:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./portainer/data:/data
       - ../shared_data:/shared
     environment:
       - TZ="America/Denver"
-    
+
   watchtower:
     container_name: watchtower
     restart: always
