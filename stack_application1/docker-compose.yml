@@ -16,7 +16,7 @@ services:
     networks:
       default:
         external:
-          name: custom_public
+          name: frontend
 
   webserver:
     build: ./config/nginx
@@ -43,7 +43,7 @@ services:
     networks:
       default:
         external:
-          name: custom_public
+          name: frontend
 
   php-fpm:
     build: ./config/php-fpm
@@ -57,4 +57,4 @@ services:
     networks:
       default:
         external:
-          name: custom_public
+          name: frontend
