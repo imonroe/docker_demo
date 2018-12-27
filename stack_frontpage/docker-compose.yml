@@ -15,7 +15,6 @@ services:
     labels:
       - "traefik.backend=frontpage"
       - "traefik.frontend.rule=Host:docker.ianmonroe.com"
-      - "traefik.frontend.rule=PathPrefixStrip:/"
       - "traefik.port=80"
       - "traefik.enable=true"
       - "traefik.frontend.entryPoints=http,https"
