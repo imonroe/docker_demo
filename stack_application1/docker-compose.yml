@@ -13,6 +13,8 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
     ports:
       - "3306"
+    networks:
+      - app1_private
 
   webserver:
     build: ./config/nginx
@@ -24,10 +26,6 @@ services:
       - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     environment:
       - HOSTNAME=app1.localhost
-    #managed by Traefik
-    #ports:
-    #  - "${WEB_SERVER_PORT}:80"
-    #  - "${WEB_SERVER_SSL_PORT}:443"
     ports:
       - 80
     labels:
@@ -36,6 +34,9 @@ services:
       - "traefik.port=80"
       - "traefik.enable=true"
       - "traefik.frontend.entryPoints=http,https"
+    networks:
+      - app1_private
+      - app1_public
 
   php-fpm:
     build: ./config/php-fpm
@@ -46,7 +47,11 @@ services:
       - ./config/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
     environment:
       - HOSTNAME=app1.localhost
+    networks:
+      - app1_private
 
 networks:
-  default:
+  app1_public:
     external: frontend
+  app1_private:
+    driver: bridge
