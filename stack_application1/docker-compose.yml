@@ -18,6 +18,7 @@ services:
     restart: always
 
   adminer:
+    container_name: application1-adminer
     image: adminer
     restart: always
     environment:
