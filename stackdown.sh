@@ -10,4 +10,4 @@ docker-compose -f ./docker-compose.yml stop
 cd $HOME_DIR
 
 # finally, we unload our administration stack
-docker-compose -f ./docker-compose.yml up -d
+docker-compose -f ./docker-compose.yml stop
