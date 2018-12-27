@@ -14,7 +14,9 @@ services:
     ports:
       - "3306"
     networks:
-      - custom_public
+      default:
+        external:
+          name: custom_public
 
   webserver:
     build: ./config/nginx
@@ -39,7 +41,9 @@ services:
       - "traefik.enable=true"
       - "traefik.frontend.entryPoints=http,https"
     networks:
-      - custom_public
+      default:
+        external:
+          name: custom_public
 
   php-fpm:
     build: ./config/php-fpm
@@ -51,4 +55,6 @@ services:
     environment:
       - HOSTNAME=app1.localhost
     networks:
-      - custom_public
+      default:
+        external:
+          name: custom_public
