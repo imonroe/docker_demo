@@ -55,10 +55,11 @@ services:
       - frontend
 
 networks:
-  frontend:
-    driver: bridge
+  custom_public:
     name: frontend
-  backend:
     driver: bridge
-    name: frontend
+  custom_private:
+    name: backend
+    driver: bridge
+
 
