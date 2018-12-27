@@ -49,4 +49,5 @@ services:
 
 networks:
   default:
-    external: frontend
+    external:
+      name: frontend
