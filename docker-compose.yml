@@ -56,8 +56,10 @@ services:
 
 networks:
   custom_public:
+    name: frontend
     driver: bridge
   custom_private:
+    name: backend
     driver: bridge
 
 
