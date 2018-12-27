@@ -4,7 +4,7 @@ services:
     image: mysql:5.7
     container_name: application1-mysql
     volumes:
-      - ./dbdata:/var/lib/mysql:rw
+      - ./dbdata:/var/lib/mysql
     user: mysql
     environment:
       - MYSQL_DATABASE=app1
