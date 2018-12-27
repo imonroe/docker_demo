@@ -9,5 +9,10 @@ cd stack_application1
 docker-compose -f ./docker-compose.yml stop
 cd $HOME_DIR
 
+# unload our application1 stack
+cd stack_frontpage
+docker-compose -f ./docker-compose.yml stop
+cd $HOME_DIR
+
 # finally, we unload our administration stack
 docker-compose -f ./docker-compose.yml stop

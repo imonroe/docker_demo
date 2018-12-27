@@ -2,7 +2,7 @@ version: '3.5'
 services:
   webserver:
     build: ./config/nginx
-    container_name: application1-webserver
+    container_name: frontpage-webserver
     hostname: frontpage.localhost
     working_dir: /application
     volumes:
