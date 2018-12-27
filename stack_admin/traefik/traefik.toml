@@ -23,8 +23,10 @@ exposedByDefault = false
 [acme]
 email = "ian@ianmonroe.com"
 storage = "acme.json"
-onDemand = true
 caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
 entryPoint = "https"
   [acme.httpChallenge]
   entryPoint = "http"
+
+[[acme.domains]]
+  main = "project.ianmonroe.com"

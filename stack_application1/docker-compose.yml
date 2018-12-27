@@ -33,9 +33,7 @@ services:
       - "traefik.frontend.rule=PathPrefixStrip:/app1"
       - "traefik.port=80"
       - "traefik.enable=true"
-      - "traefik.frontend.redirect.regex=^(.*)/app1$$"
-      - "traefik.frontend.redirect.replacement=$$1/app1/"
-      - "traefik.frontend.rule=PathPrefix:/app1;ReplacePathRegex: ^/app1/(.*) /$$1"
+      - "traefik.frontend.entryPoints=http,https"
 
   php-fpm:
     build: ./config/php-fpm
