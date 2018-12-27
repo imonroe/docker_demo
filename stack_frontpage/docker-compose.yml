@@ -1,0 +1,31 @@
+version: '3.5'
+services:
+  webserver:
+    build: ./config/nginx
+    container_name: application1-webserver
+    hostname: frontpage.localhost
+    working_dir: /application
+    volumes:
+      - ./application:/application
+      - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    environment:
+      - HOSTNAME=frontpage.localhost
+    ports:
+      - "80"
+    labels:
+      - "traefik.backend=frontpage"
+      - "traefik.frontend.rule=Host:docker.ianmonroe.com"
+      - "traefik.frontend.rule=PathPrefixStrip:/"
+      - "traefik.port=80"
+      - "traefik.enable=true"
+      - "traefik.frontend.entryPoints=http,https"
+    networks:
+      - frontpage_private
+      - frontpage_public
+
+networks:
+  frontpage_public:
+    external:
+      name: frontend
+  frontpage_private:
+    driver: bridge
