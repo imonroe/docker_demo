@@ -1,20 +1,38 @@
 version: "3.5"
 services:
   mysql:
-    image: mysql:5.7
+    image: mysql
     container_name: application1-mysql
     volumes:
       - ./dbdata:/var/lib/mysql
-    user: mysql
     environment:
       - MYSQL_DATABASE=app1
       - MYSQL_USER=app1_user
       - MYSQL_PASSWORD=supersecretpassword
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_ROOT_PASSWORD=superdupersekret
     ports:
       - "3306"
     networks:
       - app1_private
+    restart: always
+
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+      - ADMINER_DEFAULT_SERVER=mysql
+    ports:
+      - "8080"
+    networks:
+      - app1_private
+      - app1_public
+    labels:
+      - "traefik.backend=app1.adminer"
+      - "traefik.frontend.rule=PathPrefixStrip:/app1/adminer"
+      - "traefik.port=80"
+      - "traefik.enable=true"
+      - "traefik.frontend.entryPoints=http,https"
 
   webserver:
     build: ./config/nginx
@@ -27,7 +45,7 @@ services:
     environment:
       - HOSTNAME=app1.localhost
     ports:
-      - 80
+      - "80"
     labels:
       - "traefik.backend=app1"
       - "traefik.frontend.rule=PathPrefixStrip:/app1"
