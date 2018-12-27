@@ -25,7 +25,8 @@ services:
     command: --templates http://templates/templates.json
     labels:
       - "traefik.backend=portainer"
-      - "traefik.frontend.rule=Host:docker.ianmonroe.com;PathPrefixStrip:/portainer"
+      - "traefik.frontend.rule=Host:docker.ianmonroe.com"
+      - "traefik.frontend.rule=PathPrefixStrip:/portainer"
       - "traefik.port=9000"
       - "traefik.enable=true"
       - "traefik.frontend.redirect.regex=^(.*)/portainer$$"
