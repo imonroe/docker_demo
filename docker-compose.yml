@@ -25,16 +25,10 @@ services:
     command: --templates http://templates/templates.json
     labels:
       - "traefik.backend=portainer"
-      - "traefik.frontend.rule=Host:docker.ianmonroe.com"
-      - "traefik.frontend.rule=PathPrefixStrip:/portainer"
+      - "traefik.frontend.rule=Host:portainer.docker.ianmonroe.com"
       - "traefik.port=9000"
       - "traefik.enable=true"
-      - "traefik.frontend.redirect.regex=^(.*)/portainer$$"
-      - "traefik.frontend.redirect.replacement=$$1/portainer/"
-      - "traefik.frontend.rule=PathPrefix:/portainer;ReplacePathRegex: ^/portainer/(.*) /$$1"
-    #managed by Traefik
-    #ports:
-    #  - "9000:9000"
+      - "traefik.frontend.entryPoints=http,https"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./stack_admin/portainer/data:/data
