@@ -15,7 +15,7 @@ services:
       - "3306"
 
   webserver:
-    build: config/nginx
+    build: ./stack_application1/config/nginx
     container_name: application1-webserver
     hostname: app1.localhost
     working_dir: /application
@@ -38,7 +38,7 @@ services:
       - "traefik.frontend.rule=PathPrefix:/app1;ReplacePathRegex: ^/app1/(.*) /$$1"
 
   php-fpm:
-    build: config/php-fpm
+    build: ./stack_application1/config/php-fpm
     container_name: application1-php-fpm
     working_dir: /application
     volumes:
