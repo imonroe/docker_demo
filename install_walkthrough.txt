@@ -115,3 +115,13 @@ docker-machine ssh aws-sandbox
 #remove the machine
 docker-machine rm aws-sandbox
 
+#### Optional steps to make things cooler
+
+# install the sshfs plugin, so you can mount volumes via ssh.
+# docs: https://github.com/vieux/docker-volume-sshfs
+docker plugin install vieux/sshfs
+
+# Create a volume over ssh
+docker volume create -d vieux/sshfs -o sshcmd=<user@host:path> \
+-o password=<password> [-o port=<port>] sshvolume
+sshvolume
