@@ -1,4 +1,4 @@
-version: "3.6"
+version: "2"
 services:
   portainer:
     image: portainer/portainer
@@ -106,6 +106,8 @@ services:
     volumes:
       - ${USERDIR}/docker/mysql/data:/var/lib/mysql
     restart: always
+    mem_limit: 500000000
+    memswap_limit: 500000000
   drupal_8:
     image: drupal:8-apache
     container_name: drupal
@@ -125,3 +127,12 @@ services:
     environment:
       POSTGRES_PASSWORD: example
     restart: always
+  kanboard:
+    image: kanboard/kanboard:latest
+    ports:
+     - "11111:80"
+     - "11112:443"
+    volumes:
+     - ${USERDIR}/docker/kanboard/data:/var/www/app/data
+     - ${USERDIR}/docker/kanboard/plugins:/var/www/app/plugins
+     - ${USERDIR}/docker/kanboard/ssl:/etc/nginx/ssl
