@@ -13,6 +13,10 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
     ports:
       - "3306"
+    networks:
+      default:
+        external:
+          name: frontend
 
   webserver:
     build: ./config/nginx
@@ -36,6 +40,10 @@ services:
       - "traefik.port=80"
       - "traefik.enable=true"
       - "traefik.frontend.entryPoints=http,https"
+    networks:
+      default:
+        external:
+          name: frontend
 
   php-fpm:
     build: ./config/php-fpm
@@ -46,3 +54,8 @@ services:
       - ./config/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
     environment:
       - HOSTNAME=app1.localhost
+    networks:
+      default:
+        external:
+          name: frontend
+

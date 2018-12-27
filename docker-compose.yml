@@ -14,6 +14,9 @@ services:
       - ./stack_admin/traefik/traefik.toml:/traefik.toml
       - ./stack_admin/traefik/acme.json:/acme.json
     container_name: traefik
+    networks:
+      - frontend
+      - backend
 
   portainer:
     image: portainer/portainer
@@ -37,6 +40,9 @@ services:
       - ./shared_data:/shared
     environment:
       - TZ="America/Denver"
+    networks:
+      - frontend
+      - backend
 
   watchtower:
     container_name: watchtower
@@ -45,4 +51,12 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --schedule "0 0 4 * * *" --cleanup
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: default
 
