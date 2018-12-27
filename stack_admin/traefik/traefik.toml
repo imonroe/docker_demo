@@ -16,14 +16,15 @@ defaultEntryPoints = ["https","http"]
 
 [docker]
 endpoint = "unix:///var/run/docker.sock"
-domain = "my-awesome-app.org"
+domain = "docker.ianmonroe.com"
 watch = true
 exposedByDefault = false
 
 [acme]
-email = "your-email-here@my-awesome-app.org"
+email = "ian@ianmonroe.com"
 storage = "acme.json"
+onDemand = true
+caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
 entryPoint = "https"
-onHostRule = true
-[acme.httpChallenge]
-entryPoint = "http"
+  [acme.httpChallenge]
+  entryPoint = "http"

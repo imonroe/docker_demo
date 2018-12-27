@@ -21,7 +21,7 @@ services:
     restart: always
     command: --templates http://templates/templates.json
     labels:
-      #- "traefik.frontend.rule=Host:portainer.docker.ianmonroe.com"
+      - "traefik.frontend.rule=Path:/portainer/"
       - "traefik.backend=portainer"
       - "traefik.frontend.rule=PathPrefixStrip:/portainer"
       - "traefik.port=9000"
