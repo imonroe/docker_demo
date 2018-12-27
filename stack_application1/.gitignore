@@ -1,5 +1,4 @@
 .idea
 .DS_Store
-.env
 dbdata/
 phpdocker/.DS_Store

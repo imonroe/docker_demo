@@ -4,7 +4,7 @@ services:
     image: mysql:5.7
     container_name: application1-mysql
     volumes:
-      - ./dbdata:/var/lib/mysql:rw
+      - ./${STACK_NAME}/dbdata:/var/lib/mysql:rw
     user: mysql
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -20,8 +20,8 @@ services:
     hostname: ${HOSTNAME}
     working_dir: /application
     volumes:
-      - ./application:/application
-      - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./${STACK_NAME}/application:/application
+      - ./${STACK_NAME}/config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     environment:
       - HOSTNAME=${HOSTNAME}
     #managed by Traefik
@@ -42,7 +42,7 @@ services:
     container_name: application1-php-fpm
     working_dir: /application
     volumes:
-      - ${APP_DIR}:/application
-      - ./config/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+      - ./${STACK_NAME}/application:/application
+      - ./${STACK_NAME}/config/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
     environment:
       - HOSTNAME=${HOSTNAME}
