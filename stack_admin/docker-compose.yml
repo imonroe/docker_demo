@@ -5,8 +5,9 @@ services:
     image: traefik:1.5.4
     restart: always
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik/traefik.toml:/traefik.toml
