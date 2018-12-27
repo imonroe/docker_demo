@@ -2,7 +2,7 @@ version: '3.5'
 services:
 
   traefik:
-    image: traefik:1.5.4
+    image: traefik:1.7
     restart: always
     command: --api --docker # Enables the web UI and tells Traefik to listen to docker
     ports:
