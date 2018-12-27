@@ -23,7 +23,7 @@ services:
     labels:
       - "traefik.frontend.rule=Path:/portainer/"
       - "traefik.backend=portainer"
-      - "traefik.frontend.rule=PathPrefixStrip:/portainer"
+      - "traefik.frontend.rule=PathPrefixStrip:/portainer/"
       - "traefik.port=9000"
       - "traefik.enable=true"
     #managed by Traefik
