@@ -28,7 +28,7 @@ services:
 
   db:
     image: mysql:5
-    container_name: wordpress-db
+    container_name: wordpress-mysql
     restart: always
     ports:
       - "3306"
