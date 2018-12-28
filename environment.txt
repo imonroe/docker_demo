@@ -1,6 +1,0 @@
-PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/imonroe/bash_scripts"
-PUID=1000
-PGID=999
-TZ="America/Chicago"
-USERDIR="/home/imonroe"
-MYSQL_ROOT_PASSWORD="passsword"

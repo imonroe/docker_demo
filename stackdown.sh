@@ -19,5 +19,10 @@ cd stack_stats
 docker-compose -f ./docker-compose.yml stop
 cd $HOME_DIR
 
+# unload our wordpress stack
+cd stack_wordpress
+docker-compose -f ./docker-compose.yml stop
+cd $HOME_DIR
+
 # finally, we unload our administration stack
 docker-compose -f ./docker-compose.yml stop
