@@ -68,7 +68,6 @@ services:
       - "9100"
     networks:
       - monitor-net
-      - stats_public
     labels:
       - "org.label-schema.group=monitoring"
 
@@ -135,6 +134,7 @@ services:
     restart: unless-stopped
     networks:
       - monitor-net
+      - stats_public
     labels:
       - "org.label-schema.group=monitoring"
       - "traefik.backend=stats_app"
