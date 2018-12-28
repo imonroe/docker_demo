@@ -31,8 +31,14 @@ services:
       - "9090"
     networks:
       - monitor-net
+      - stats_public
     labels:
       - "org.label-schema.group=monitoring"
+      - "traefik.backend=stats_prometheus"
+      - "traefik.frontend.rule=Host:stats.docker.ianmonroe.com;PathPrefixStrip:/prometheus"
+      - "traefik.port=9090"
+      - "traefik.enable=true"
+      - "traefik.frontend.entryPoints=http,https"
 
   alertmanager:
     image: prom/alertmanager:v0.15.3
@@ -47,8 +53,14 @@ services:
       - "9093"
     networks:
       - monitor-net
+      - stats_public
     labels:
       - "org.label-schema.group=monitoring"
+      - "traefik.backend=stats_alertmanager"
+      - "traefik.frontend.rule=Host:stats.docker.ianmonroe.com;PathPrefixStrip:/alertmanager"
+      - "traefik.port=9093"
+      - "traefik.enable=true"
+      - "traefik.frontend.entryPoints=http,https"
 
   nodeexporter:
     image: prom/node-exporter:v0.17.0
@@ -85,8 +97,14 @@ services:
       - "8080"
     networks:
       - monitor-net
+      - stats_public
     labels:
       - "org.label-schema.group=monitoring"
+      - "traefik.backend=stats_cadvisor"
+      - "traefik.frontend.rule=Host:stats.docker.ianmonroe.com;PathPrefixStrip:/cadvisor"
+      - "traefik.port=8080"
+      - "traefik.enable=true"
+      - "traefik.frontend.entryPoints=http,https"
 
   grafana:
     image: grafana/grafana:5.4.2
@@ -106,6 +124,14 @@ services:
       - "3000"
     networks:
       - monitor-net
+      - stats_public
+    labels:
+      - "org.label-schema.group=monitoring"
+      - "traefik.backend=stats_grafana"
+      - "traefik.frontend.rule=Host:stats.docker.ianmonroe.com"
+      - "traefik.port=3000"
+      - "traefik.enable=true"
+      - "traefik.frontend.entryPoints=http,https"
 
   pushgateway:
     image: prom/pushgateway:v0.7.0
@@ -118,27 +144,27 @@ services:
     labels:
       - "org.label-schema.group=monitoring"
 
-  caddy:
-    image: stefanprodan/caddy
-    container_name: caddy
-    ports:
-      - "3000"
-      - "9090"
-      - "9093"
-      - "9091"
-    volumes:
-      - ./caddy/:/etc/caddy/
-    environment:
-      - ADMIN_USER=${ADMIN_USER:-admin}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-    restart: unless-stopped
-    networks:
-      - monitor-net
-      - stats_public
-    labels:
-      - "org.label-schema.group=monitoring"
-      - "traefik.backend=stats_app"
-      - "traefik.frontend.rule=Host:stats.docker.ianmonroe.com"
-      - "traefik.port=3000"
-      - "traefik.enable=true"
-      - "traefik.frontend.entryPoints=http,https"
+#  caddy:
+#    image: stefanprodan/caddy
+#    container_name: caddy
+#    ports:
+#      - "3000"
+#      - "9090"
+#      - "9093"
+#      - "9091"
+#    volumes:
+#      - ./caddy/:/etc/caddy/
+#    environment:
+#      - ADMIN_USER=${ADMIN_USER:-admin}
+#      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+#    restart: unless-stopped
+#    networks:
+#      - monitor-net
+#      - stats_public
+#    labels:
+#      - "org.label-schema.group=monitoring"
+#      - "traefik.backend=stats_app"
+#      - "traefik.frontend.rule=Host:stats.docker.ianmonroe.com"
+#      - "traefik.port=3000"
+#      - "traefik.enable=true"
+#      - "traefik.frontend.entryPoints=http,https"
