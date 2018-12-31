@@ -1,0 +1,30 @@
+version: '3.5'
+services:
+  laravel:
+    build: .
+    container_name: laravel
+    hostname: laravel.localhost
+    working_dir: /application
+    volumes:
+      - ./src:/var/www/html
+      - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    environment:
+      - HOSTNAME=laravel.localhost
+    ports:
+      - "80"
+    labels:
+      - "traefik.backend=laravel"
+      - "traefik.frontend.rule=Host:laravel.docker.ianmonroe.com"
+      - "traefik.port=80"
+      - "traefik.enable=true"
+      - "traefik.frontend.entryPoints=http,https"
+    networks:
+      - laravel_private
+      - laravel_public
+
+networks:
+  laravel_public:
+    external:
+      name: frontend
+  laravel_private:
+    driver: bridge

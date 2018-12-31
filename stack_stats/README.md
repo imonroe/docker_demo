@@ -1,3 +1,6 @@
+## This is a modified version, which uses Traefik for reverse-proxy.  Based on: https://stefanprodan.com/2016/a-monitoring-solution-for-docker-hosts-containers-and-containerized-services/
+
+
 dockprom
 ========
 
