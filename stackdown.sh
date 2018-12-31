@@ -24,5 +24,10 @@ cd stack_wordpress
 docker-compose -f ./docker-compose.yml stop
 cd $HOME_DIR
 
+# unload our laravel stack
+cd stack_laravel
+docker-compose -f ./docker-compose.yml stop
+cd $HOME_DIR
+
 # finally, we unload our administration stack
 docker-compose -f ./docker-compose.yml stop
