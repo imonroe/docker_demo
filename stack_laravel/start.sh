@@ -4,18 +4,18 @@
 # Create the .env file if it does not exist.
 # ----------------------------------------------------------------------
 
-if [[ ! -f "/var/www/.env" ]] && [[ -f "/var/www/.env.example" ]];
+if [[ ! -f "/var/www/html/.env" ]] && [[ -f "/var/www/html/.env.example" ]];
 then
-cp /var/www/.env.example /var/www/.env
+cp /var/www/html/.env.example /var/www/html/.env
 fi
 
 # ----------------------------------------------------------------------
 # Run Composer
 # ----------------------------------------------------------------------
 
-if [[ ! -d "/var/www/vendor" ]];
+if [[ ! -d "/var/www/html/vendor" ]];
 then
-cd /var/www
+cd /var/www/html
 composer update
 composer dump-autoload -o
 fi
@@ -24,4 +24,4 @@ fi
 # Start supervisord
 # ----------------------------------------------------------------------
 
-exec /usr/bin/supervisord -n -c /etc/supervisord.conf
+# exec /usr/bin/supervisord -n -c /etc/supervisord.conf
