@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN echo "PHP modules installed: " && php -i
 
-RUN docker-php-ext-install xml openssl json phar dom session zlib zip
+RUN docker-php-ext-install zlib zip
 
 RUN cd /var/www && curl -sS https://getcomposer.org/installer -o composer-setup.php && \
 php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
