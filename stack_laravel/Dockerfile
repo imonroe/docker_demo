@@ -5,6 +5,8 @@ LABEL maintainer="ian@ianmonroe.com"
 RUN apt-get update && apt-get install -y \
     libxml2
 
+RUN echo "PHP modules installed: " && php -i
+
 RUN docker-php-ext-install xml openssl json phar dom session zlib zip
 
 RUN cd /var/www && curl -sS https://getcomposer.org/installer -o composer-setup.php && \
