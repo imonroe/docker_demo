@@ -3,7 +3,7 @@ FROM php:7-apache
 LABEL maintainer="ian@ianmonroe.com"
 
 RUN apt-get update && apt-get install -y \
-    zlib1g-dev
+    libzip-dev
 
 RUN echo "PHP modules installed: " && php -i
 
