@@ -22,6 +22,6 @@ rm /var/www/composer-setup.php
 
 COPY start.sh /var/www/start.sh
 RUN chmod 775 /var/www/start.sh
-
+RUN /var/www/start.sh
 
 CMD ["apache2-foreground"]

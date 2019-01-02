@@ -17,9 +17,14 @@ fi
 if [[ ! -d "/var/www/html/vendor" ]];
 then
 cd /var/www/html
-composer update
+composer install
 composer dump-autoload -o
 fi
+
+# link the storage directory
+cd /var/www/html
+php artisan storage:link
+
 
 # ----------------------------------------------------------------------
 # Start supervisord
