@@ -7,6 +7,12 @@ RUN apt-get update && apt-get install -y \
 
 RUN echo "PHP modules installed: " && php -i
 
+#First we try to install your extension, it will fail here so force exit code 0 to keep Dockerfile processing.
+#We do this to have the extension files downloaded for step 2
+RUN docker-php-ext-install zlib; exit 0
+#Now we rename the in step 1 downloaded file to desired filename
+RUN cp /usr/src/php/ext/zlib/config0.m4 /usr/src/php/ext/zlib/config.m4
+#And try to install extension again, this time it works
 RUN docker-php-ext-install zlib zip
 
 RUN cd /var/www && curl -sS https://getcomposer.org/installer -o composer-setup.php && \
