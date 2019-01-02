@@ -2,6 +2,9 @@ FROM php:7-apache
 
 LABEL maintainer="ian@ianmonroe.com"
 
+RUN apt-get update && apt-get install -y \
+    libxml2
+
 RUN docker-php-ext-install xml openssl json phar dom session zlib zip
 
 RUN cd /var/www && curl -sS https://getcomposer.org/installer -o composer-setup.php && \
