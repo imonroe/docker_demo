@@ -37,10 +37,11 @@ services:
     volumes:
       - ./dbdata:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: exampledb
-      MYSQL_USER: exampleuser
-      MYSQL_PASSWORD: examplepass
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+      - MYSQL_DATABASE=exampledb
+      - MYSQL_USER=exampleuser
+      - MYSQL_PASSWORD=examplepass
+      - MYSQL_ALLOW_EMPTY_PASSWORD=false
+      - MYSQL_ROOT_PASSWORD=superdupersekret
     networks:
       - wp_private
     labels:
