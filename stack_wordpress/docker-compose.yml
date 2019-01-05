@@ -44,6 +44,8 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     networks:
       - wp_private
+    labels:
+      - "traefik.enable=false"
 
 networks:
   wp_public:

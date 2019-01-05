@@ -16,6 +16,8 @@ services:
     networks:
       - app1_private
     restart: always
+    labels:
+      - "traefik.enable=false"
 
   webserver:
     build: ./config/nginx
@@ -50,6 +52,8 @@ services:
       - HOSTNAME=app1.localhost
     networks:
       - app1_private
+    labels:
+      - "traefik.enable=false"
 
   adminer:
     container_name: application1-adminer
