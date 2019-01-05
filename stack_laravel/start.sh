@@ -17,7 +17,7 @@ fi
 if [[ ! -d "/var/www/html/vendor" ]];
 then
 cd /var/www/html
-composer install
+composer install --prefer-dist
 composer dump-autoload -o
 fi
 
