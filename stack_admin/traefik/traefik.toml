@@ -24,6 +24,6 @@ exposedByDefault = false
 email = "ian@ianmonroe.com"
 storage = "acme.json"
 entryPoint = "https"
-onHostRule = true
+onHostRule = false
 [acme.httpChallenge]
 entryPoint = "http"
