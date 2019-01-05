@@ -20,7 +20,6 @@ services:
       - wp_private
       - wp_public
     labels:
-      - "traefik.backend=wordpress"
       - "traefik.frontend.rule=Host:wordpress.docker.ianmonroe.com"
       - "traefik.port=80"
       - "traefik.enable=true"
