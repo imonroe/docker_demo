@@ -27,8 +27,8 @@ services:
 
   db:
     build:
-      context: ../container_lomem_mysql
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ../container_lomem_mysql/Dockerfile
     # image: mysql:5
     container_name: wordpress-mysql
     restart: always
