@@ -103,9 +103,9 @@ services:
       - "org.label-schema.group=monitoring"
       - "traefik.backend=stats_cadvisor"
       - "traefik.frontend.rule=Host:stats.docker.ianmonroe.com;PathPrefixStrip:/cadvisor"
-     - "traefik.port=8080"
-     - "traefik.enable=true"
-     - "traefik.frontend.entryPoints=http,https"
+      - "traefik.port=8080"
+      - "traefik.enable=true"
+      - "traefik.frontend.entryPoints=http,https"
 
   grafana:
     image: grafana/grafana:5.4.2
