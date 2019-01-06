@@ -45,6 +45,25 @@ services:
     labels:
       - "traefik.enable=false"
 
+  adminer:
+    container_name: wordpress-adminer
+    image: adminer
+    restart: always
+    environment:
+      - ADMINER_DEFAULT_SERVER=mysql
+    ports:
+      - "8080"
+    networks:
+      - wp_private
+      - wp_public
+    labels:
+      - "traefik.backend=wordpress.adminer"
+      - "traefik.frontend.passHostHeader:true"
+      - "traefik.frontend.rule=Host:wordpress.docker.ianmonroe.com;PathPrefixStrip:/adminer"
+      - "traefik.port=8080"
+      - "traefik.enable=true"
+      - "traefik.frontend.entryPoints=http,https"
+
 networks:
   wp_public:
     external:

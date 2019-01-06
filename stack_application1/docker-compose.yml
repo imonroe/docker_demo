@@ -5,6 +5,7 @@ services:
     container_name: application1-mysql
     volumes:
       - ./dbdata:/var/lib/mysql
+      - ./low-memory-my.cnf:/etc/mysql/my.cnf
     environment:
       - MYSQL_DATABASE=app1
       - MYSQL_USER=app1_user
