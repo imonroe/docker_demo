@@ -26,16 +26,14 @@ services:
       - "traefik.frontend.entryPoints=http,https"
 
   db:
-    build:
-      context: .
-      dockerfile: lomem_mysql_Dockerfile
-    # image: mysql:5
+    image: mysql:5
     container_name: wordpress-mysql
     restart: always
     ports:
       - "3306"
     volumes:
       - ./dbdata:/var/lib/mysql
+      - ./low-memory-my.cnf:/etc/mysql/my.cnf
     environment:
       - MYSQL_DATABASE=exampledb
       - MYSQL_USER=exampleuser
