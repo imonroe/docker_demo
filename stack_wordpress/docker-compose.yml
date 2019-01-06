@@ -50,7 +50,7 @@ services:
     image: adminer
     restart: always
     environment:
-      - ADMINER_DEFAULT_SERVER=mysql
+      - ADMINER_DEFAULT_SERVER=db
     ports:
       - "8080"
     networks:

@@ -1,26 +1,33 @@
 Build:
+
 `docker-compose up -d --build`
 
 Unload:
+
 `docker-compose down`
 
 Delete orphans:
+
 `docker-compose down --remove-orphans`
 
 Delete cache and images:
+
 `docker system prune -a`
 
 Show active images:
+
 `docker-compose ps`
 
 Open bash for project:
+
 `docker-compose exec project bash`
 
 Load project multisite:
-`docker-compose exec project sh -c "maintenance @legaldefence.local https://legaldefence.co.uk"`
-`docker-compose exec project sh -c "maintenance @privacydefence.local https://privacydefence.co.uk"`
+
+`docker-compose exec project sh`
 
 Add Drupal module package:
+
 `docker-compose exec project sh -c "cd .. && composer require drupal/addtoany --prefer-stable"`
 
 Update composer modules:
