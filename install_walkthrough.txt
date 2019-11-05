@@ -71,6 +71,11 @@ dockerup
 
 # boom goes the dynamite.
 
+# HEY, YO, STOP HERE IF YOU JUST WANT TO PLAY WITH DOCKER.
+# But if you're looking for even more fun, here's some stuff to get you started with docker-machine and swarms, using ephemeral EC2 instances in Amazon's cloud.  Beyond this point, you'll need an AWS account and some billing info.  tinkering won't cost much paper money.
+
+
+
 # install docker machine
 base=https://github.com/docker/machine/releases/download/v0.14.0 && curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine && sudo install /tmp/docker-machine /usr/local/bin/docker-machine
 
